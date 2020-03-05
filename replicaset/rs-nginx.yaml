@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs  #name of the object
+spec:
+  replicas: 3    #number of replicas to create
+  selector:
+    matchLabels:
+      app: nginx-app-rs    # link with the labels of the pods
+  template:
+    metadata:
+      name: nginx-pod    # name of the pod
+      labels:
+        app: nginx-app-rs    # its like a tag to the pod
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx-container   # name of the container
+        image: nginx     	# image used to create container
+        ports:
+        - containerPort: 80
+
